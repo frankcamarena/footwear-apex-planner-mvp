@@ -3,7 +3,7 @@ dataclasses==0.6
 Django==4.2.14
 django-cors-headers==3.11.0
 djangorestframework==3.14.0
-djongo==1.3.7
+djongo==1.4.13
 dnspython==2.7.0
 pymongo==4.15.3
 pytz==2025.2
