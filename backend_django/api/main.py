@@ -1,12 +1,14 @@
 import os
 import json
 from datetime import datetime
-from bson.objectid import ObjectId
 from typing import List, Optional
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from pymongo import MongoClient
+
+# IMPORTANTE: Necesitas esta línea para la serialización robusta de tipos BSON (ObjectId, ISODate)
+from bson import json_util
 
 # --- Configuración de la Conexión ---
 # Utilizamos la variable de entorno MONGO_URI, que configurarás en Render.
@@ -20,14 +22,14 @@ if not MONGO_URI:
 # Conexión al cliente de MongoDB Atlas
 try:
     client = MongoClient(MONGO_URI)
-    DB_NAME = "footwear" # <<-- IMPORTANTE: REEMPLAZA con el nombre de tu BD en Atlas
+    DB_NAME = "footwear" # Nombre de la BD confirmado
     db = client[DB_NAME]
     print(f"INFO: Conexión exitosa a la base de datos: {DB_NAME}")
 except Exception as e:
     print(f"ERROR: Fallo en la conexión a MongoDB: {e}")
     # En un entorno de producción, podrías querer que la app no se inicie aquí
 
-# --- Modelos de Pydantic (Validación de Datos) ---
+# --- Modelos de Pydantic (Aunque la respuesta final es forzada a JSON, es bueno tener la definición) ---
 # Usamos Pydantic para definir la estructura de datos que se espera
 # y para serializar el JSON de salida.
 
@@ -66,12 +68,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- Funciones Auxiliares ---
+# --- Funciones Auxiliares (SERIALIZACIÓN ROBUSTA) ---
 def serialize_mongo_doc(doc: dict) -> dict:
-    """Convierte el _id de ObjectId a str y elimina campos innecesarios."""
-    if doc.get('_id'):
-        doc['_id'] = str(doc['_id'])
-    return doc
+    """
+    Convierte un documento BSON (con ObjectId, ISODate) en un diccionario
+    JSON seguro. Esto resuelve el Internal Server Error.
+    """
+    # json_util.dumps convierte el documento a JSON string,
+    # y json.loads lo convierte de nuevo a un dict estándar de Python.
+    return json.loads(json_util.dumps(doc))
 
 # --- Endpoints de la API ---
 
@@ -80,11 +85,11 @@ def root():
     """Endpoint de estado del servicio."""
     return {"message": "API is running. Connected to MongoDB Atlas."}
 
-@app.get("/api/sales", response_model=List[TransactionsSales], tags=["Data"])
+@app.get("/api/sales", tags=["Data"]) # <--- response_model ELIMINADO para evitar fallos de serialización
 async def get_sales_data(limit: int = 1000):
     """Obtiene datos de Transacciones de Ventas (limitado por defecto)."""
     try:
-        sales_collection = db["transactions_sales"] # Reemplaza con el nombre real de tu colección
+        sales_collection = db["transactions_sales"] # Reemplaza con el nombre real de tu colección si no es correcto
         
         # Consulta de PyMongo: Obtiene los documentos
         # IMPORTANTE: limitamos la salida para no sobrecargar el frontend, 
@@ -92,11 +97,12 @@ async def get_sales_data(limit: int = 1000):
         data = list(sales_collection.find().limit(limit))
         
         # Serialización de los datos (de MongoDB a Python/JSON)
+        # Usamos la función robusta para manejar los tipos de BSON
         serialized_data = [serialize_mongo_doc(doc) for doc in data]
         
-        return serialized_data
+        return serialized_data # FastAPI devolverá el JSON
     except Exception as e:
-        print(f"ERROR al obtener datos de ventas: {e}")
-        raise HTTPException(status_code=500, detail="Error al consultar datos de ventas.")
-
-# Puedes añadir más endpoints aquí (ej: /api/stores, /api/products)
+        # Imprime el error completo en el log de Render
+        print(f"ERROR CRÍTICO al obtener datos de ventas: {e}") 
+        # Devuelve un mensaje de error más útil al cliente
+        raise HTTPException(status_code=500, detail=f"Error al consultar datos de ventas. Revise el log de Render: {e}")
