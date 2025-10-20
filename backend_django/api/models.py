@@ -40,13 +40,13 @@ class ProductMaster(models.Model):
 # 3. Stores Master (Colección Original: stores_master) <--- ¡NUEVO!
 # ----------------------------------------------------------------------
 class StoresMaster(models.Model):
-    store_id = models.IntegerField(primary_key=True)
+    # CAMBIO: Usar CharField para aceptar texto como "STORE001" y "ECOMM"
+    store_id = models.CharField(max_length=10, primary_key=True) 
     store_name = models.CharField(max_length=100)
-    region = models.CharField(max_length=50) # Ejemplo de campo
+    region = models.CharField(max_length=50) 
     
     def __str__(self):
         return self.store_name
-
 # ----------------------------------------------------------------------
 # 4. Transactions Sales (Colección Original: transactions_sales) <--- ¡NUEVO!
 # ----------------------------------------------------------------------
