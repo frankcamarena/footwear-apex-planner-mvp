@@ -2,22 +2,32 @@
 
 import os
 from pathlib import Path
+import dj_database_url # <--- NUEVA IMPORTACIÓN: Para leer la URL de PostgreSQL de Render
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j!w%g1q6m!^a@t!w^c6g^w0!3^g2^g1s!g!g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s'
+# Se recomienda leer la SECRET_KEY desde una variable de entorno en producción
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', 
+    'django-insecure-j!w%g1q6m!^a@t!w^c6g^w0!3^g2^g1s!g!g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s^g1s'
+)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Usamos una variable de entorno para controlar el DEBUG en Render
+DEBUG = os.environ.get('DEBUG') == 'True' 
 
-ALLOWED_HOSTS = ['*'] # Use '*' for development/Replit/Render. Be more restrictive in final production.
+# ALLOWED_HOSTS
+# Render te proporciona un host, pero podemos mantener '*' o usar el nombre de dominio de Render
+ALLOWED_HOSTS = ['*'] 
 
 
-# --- INSTALLED APPS (REPLACE ESTA SECCIÓN) ---
+# ----------------------------------------------------------------------
+# INSTALLED APPS (ACTUALIZADO PARA POSTGRESQL/DJANGO 4.2)
+# ----------------------------------------------------------------------
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,9 +43,13 @@ INSTALLED_APPS = [
 ]
 
 
-# --- MIDDLEWARE (REPLACE ESTA SECCIÓN) ---
+# ----------------------------------------------------------------------
+# MIDDLEWARE (SIN CAMBIOS, PERO FUNCIONA CON DJANGO 4.2)
+# ----------------------------------------------------------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    # Middleware para Gunicorn y Render (esenciales para HTTP seguro)
+    'whitenoise.middleware.WhiteNoiseMiddleware', # <--- RECOMENDADO: Añadir si sirves static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     # CORS Middleware must be before CommonMiddleware (IMPORTANT)
     'corsheaders.middleware.CorsMiddleware', 
@@ -67,23 +81,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'apex_project.wsgi.application'
 
 
-# --- MongoDB Atlas Connection (NEW SECTION) ---
-# NOTE: This line reads the URI from the environment (Render) or uses the default for local testing.
-MONGO_URI = os.environ.get(
-    'MONGO_URI', 
-    'mongodb+srv://dynamic:Peru2022@Cluster0.6etb2.mongodb.net/?retryWrites=true&w=majority'
-)
+# ----------------------------------------------------------------------
+# BASE DE DATOS (CONFIGURACIÓN PARA POSTGRESQL EN RENDER) <--- ¡CAMBIO CRUCIAL!
+# ----------------------------------------------------------------------
+# Elimina MONGO_URI y la configuración Djongo/MongoDB.
 
+# Usa dj_database_url para leer automáticamente la variable de entorno DATABASE_URL
+# proporcionada por Render y configurar el backend de PostgreSQL.
+
+
+# TEMPORAL: para que el comando makemigrations funcione localmente sin PostgreSQL
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'footwear', # Your database name in Atlas
-        'ENFORCE_SCHEMA': False, # Important for NoSQL flexibility
-        'CONN_MAX_AGE': 0,
-        'CLIENT': {
-            'host': MONGO_URI,
-        }
-    }
+    'default': dj_database_url.config(
+        # Render inyectará su DATABASE_URL aquí
+        default=os.environ.get('DATABASE_URL'), 
+        conn_max_age=600, 
+        # conn_health_check=True, 
+    )
 }
 
 
@@ -107,18 +121,23 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+# ----------------------------------------------------------------------
+# ARCHIVOS ESTÁTICOS Y CONFIGURACIÓN DE PRODUCCIÓN (¡IMPORTANTE PARA RENDER!)
+# ----------------------------------------------------------------------
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles' # Directorio donde 'collectstatic' reunirá los archivos
+
+# Opcional: Configuración para WhiteNoise (si se usa para servir estáticos en producción)
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' 
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
+# Se usa BigAutoField para evitar errores comunes de compatibilidad con PostgreSQL y migraciones.
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# --- CORS Settings (NEW SECTION - Required for React) ---
+# --- CORS Settings (SIN CAMBIOS) ---
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", # Common for React Dev Server
     # Add your Vercel/Netlify URL here after deployment (e.g., "https://mvp-planificacion.vercel.app")
