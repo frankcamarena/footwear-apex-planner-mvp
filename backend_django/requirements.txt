@@ -8,3 +8,4 @@ psycopg2-binary  # Driver for PostgreSQL
 pytz==2025.2
 typing_extensions==4.15.0
 gunicorn==23.0.0
+whitenoise==6.6.0
