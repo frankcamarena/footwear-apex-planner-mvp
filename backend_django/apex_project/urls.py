@@ -22,7 +22,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
-    # CLAVE: Incluir todos los endpoints de 'api' bajo el prefijo /api/v1/
-    path('api/v1/', include('api.urls')), 
+
+    # CAMBIO: Usar solo 'api/'
+    path('api/', include('api.urls')), 
 ]
