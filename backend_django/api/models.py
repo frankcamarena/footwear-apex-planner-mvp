@@ -90,10 +90,18 @@ class TransactionsSales(models.Model):
     transaction_id = models.CharField(max_length=30, primary_key=True) 
     
     # FOREIGN KEYS
-    # store_id debe apuntar a StoresMaster
-    store = models.ForeignKey(StoresMaster, on_delete=models.DO_NOTHING) 
+    # store_id debe apuntar a StoresMaster 
+    store_id = models.ForeignKey(
+        StoresMaster, 
+        on_delete=models.DO_NOTHING, 
+        db_column='store_id' # Mantiene el nombre de la columna en la BD
+    )
     # sku_id debe apuntar a ProductMaster
-    product = models.ForeignKey(ProductMaster, on_delete=models.DO_NOTHING) 
+    sku_id = models.ForeignKey(
+        ProductMaster, 
+        on_delete=models.DO_NOTHING, 
+        db_column='sku_id' # Mantiene el nombre de la columna en la BD
+    ) 
     
     # Campos en el JSON:
     transaction_date = models.DateTimeField()
