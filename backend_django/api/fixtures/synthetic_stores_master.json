@@ -1,0 +1,610 @@
+[
+  {
+    "_id": "STORE001",
+    "store_location": "City 1",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2019-12-10T14:57:54.507017"
+  },
+  {
+    "_id": "STORE002",
+    "store_location": "City 2",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2022-09-28T14:57:54.507058"
+  },
+  {
+    "_id": "STORE003",
+    "store_location": "City 3",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2023-01-12T14:57:54.507070"
+  },
+  {
+    "_id": "STORE004",
+    "store_location": "City 4",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2020-11-01T14:57:54.507079"
+  },
+  {
+    "_id": "STORE005",
+    "store_location": "City 5",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2018-03-29T14:57:54.507093"
+  },
+  {
+    "_id": "STORE006",
+    "store_location": "City 6",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2022-03-05T14:57:54.507102"
+  },
+  {
+    "_id": "STORE007",
+    "store_location": "City 7",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2021-12-17T14:57:54.507109"
+  },
+  {
+    "_id": "STORE008",
+    "store_location": "City 8",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2021-12-13T14:57:54.507113"
+  },
+  {
+    "_id": "STORE009",
+    "store_location": "City 9",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2019-04-28T14:57:54.507117"
+  },
+  {
+    "_id": "STORE010",
+    "store_location": "City 10",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2017-08-11T14:57:54.507121"
+  },
+  {
+    "_id": "STORE011",
+    "store_location": "City 11",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2018-08-17T14:57:54.507126"
+  },
+  {
+    "_id": "STORE012",
+    "store_location": "City 12",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2021-09-21T14:57:54.507130"
+  },
+  {
+    "_id": "STORE013",
+    "store_location": "City 13",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2021-07-31T14:57:54.507134"
+  },
+  {
+    "_id": "STORE014",
+    "store_location": "City 14",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2017-10-02T14:57:54.507138"
+  },
+  {
+    "_id": "STORE015",
+    "store_location": "City 15",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2019-12-25T14:57:54.507142"
+  },
+  {
+    "_id": "STORE016",
+    "store_location": "City 16",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2020-10-06T14:57:54.507149"
+  },
+  {
+    "_id": "STORE017",
+    "store_location": "City 17",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2017-09-19T14:57:54.507154"
+  },
+  {
+    "_id": "STORE018",
+    "store_location": "City 18",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2018-11-26T14:57:54.507159"
+  },
+  {
+    "_id": "STORE019",
+    "store_location": "City 19",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2018-12-11T14:57:54.507163"
+  },
+  {
+    "_id": "STORE020",
+    "store_location": "City 20",
+    "store_cluster": "A",
+    "store_type": "MALL",
+    "max_option_capacity": 50,
+    "opening_date": "2020-12-09T14:57:54.507168"
+  },
+  {
+    "_id": "STORE021",
+    "store_location": "City 21",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2021-10-15T14:57:54.507173"
+  },
+  {
+    "_id": "STORE022",
+    "store_location": "City 22",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2018-11-03T14:57:54.507177"
+  },
+  {
+    "_id": "STORE023",
+    "store_location": "City 23",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2020-03-20T14:57:54.507181"
+  },
+  {
+    "_id": "STORE024",
+    "store_location": "City 24",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2022-02-04T14:57:54.507187"
+  },
+  {
+    "_id": "STORE025",
+    "store_location": "City 25",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2018-11-09T14:57:54.507192"
+  },
+  {
+    "_id": "STORE026",
+    "store_location": "City 26",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2020-07-10T14:57:54.507196"
+  },
+  {
+    "_id": "STORE027",
+    "store_location": "City 27",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2017-10-12T14:57:54.507200"
+  },
+  {
+    "_id": "STORE028",
+    "store_location": "City 28",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2018-12-30T14:57:54.507204"
+  },
+  {
+    "_id": "STORE029",
+    "store_location": "City 29",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2020-08-15T14:57:54.507208"
+  },
+  {
+    "_id": "STORE030",
+    "store_location": "City 30",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2018-01-28T14:57:54.507215"
+  },
+  {
+    "_id": "STORE031",
+    "store_location": "City 31",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2017-12-17T14:57:54.507219"
+  },
+  {
+    "_id": "STORE032",
+    "store_location": "City 32",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2017-11-03T14:57:54.507223"
+  },
+  {
+    "_id": "STORE033",
+    "store_location": "City 33",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2018-04-29T14:57:54.507227"
+  },
+  {
+    "_id": "STORE034",
+    "store_location": "City 34",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2018-06-17T14:57:54.507232"
+  },
+  {
+    "_id": "STORE035",
+    "store_location": "City 35",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2021-04-15T14:57:54.507236"
+  },
+  {
+    "_id": "STORE036",
+    "store_location": "City 36",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2018-07-02T14:57:54.507240"
+  },
+  {
+    "_id": "STORE037",
+    "store_location": "City 37",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2022-04-05T14:57:54.507244"
+  },
+  {
+    "_id": "STORE038",
+    "store_location": "City 38",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2022-10-09T14:57:54.507248"
+  },
+  {
+    "_id": "STORE039",
+    "store_location": "City 39",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2022-01-27T14:57:54.507252"
+  },
+  {
+    "_id": "STORE040",
+    "store_location": "City 40",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2019-01-22T14:57:54.507256"
+  },
+  {
+    "_id": "STORE041",
+    "store_location": "City 41",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2022-12-14T14:57:54.507260"
+  },
+  {
+    "_id": "STORE042",
+    "store_location": "City 42",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2017-08-11T14:57:54.507265"
+  },
+  {
+    "_id": "STORE043",
+    "store_location": "City 43",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2020-06-25T14:57:54.507269"
+  },
+  {
+    "_id": "STORE044",
+    "store_location": "City 44",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2020-05-18T14:57:54.507275"
+  },
+  {
+    "_id": "STORE045",
+    "store_location": "City 45",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2021-03-17T14:57:54.507279"
+  },
+  {
+    "_id": "STORE046",
+    "store_location": "City 46",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2021-07-09T14:57:54.507283"
+  },
+  {
+    "_id": "STORE047",
+    "store_location": "City 47",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2022-12-28T14:57:54.507287"
+  },
+  {
+    "_id": "STORE048",
+    "store_location": "City 48",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2017-10-02T14:57:54.507291"
+  },
+  {
+    "_id": "STORE049",
+    "store_location": "City 49",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2022-05-17T14:57:54.507295"
+  },
+  {
+    "_id": "STORE050",
+    "store_location": "City 50",
+    "store_cluster": "B",
+    "store_type": "MALL",
+    "max_option_capacity": 40,
+    "opening_date": "2020-06-27T14:57:54.507299"
+  },
+  {
+    "_id": "STORE051",
+    "store_location": "City 51",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2017-10-19T14:57:54.507303"
+  },
+  {
+    "_id": "STORE052",
+    "store_location": "City 52",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2019-01-17T14:57:54.507307"
+  },
+  {
+    "_id": "STORE053",
+    "store_location": "City 53",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2021-08-21T14:57:54.507311"
+  },
+  {
+    "_id": "STORE054",
+    "store_location": "City 54",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2018-06-23T14:57:54.507316"
+  },
+  {
+    "_id": "STORE055",
+    "store_location": "City 55",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2017-08-28T14:57:54.507320"
+  },
+  {
+    "_id": "STORE056",
+    "store_location": "City 56",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2018-07-07T14:57:54.507324"
+  },
+  {
+    "_id": "STORE057",
+    "store_location": "City 57",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2019-01-29T14:57:54.507328"
+  },
+  {
+    "_id": "STORE058",
+    "store_location": "City 58",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2022-03-25T14:57:54.507332"
+  },
+  {
+    "_id": "STORE059",
+    "store_location": "City 59",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2019-12-07T14:57:54.507336"
+  },
+  {
+    "_id": "STORE060",
+    "store_location": "City 60",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2018-07-11T14:57:54.507340"
+  },
+  {
+    "_id": "STORE061",
+    "store_location": "City 61",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2019-03-25T14:57:54.507344"
+  },
+  {
+    "_id": "STORE062",
+    "store_location": "City 62",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2022-01-26T14:57:54.507351"
+  },
+  {
+    "_id": "STORE063",
+    "store_location": "City 63",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2018-02-15T14:57:54.507357"
+  },
+  {
+    "_id": "STORE064",
+    "store_location": "City 64",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2022-08-08T14:57:54.507361"
+  },
+  {
+    "_id": "STORE065",
+    "store_location": "City 65",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2018-11-27T14:57:54.507365"
+  },
+  {
+    "_id": "STORE066",
+    "store_location": "City 66",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2021-11-24T14:57:54.507372"
+  },
+  {
+    "_id": "STORE067",
+    "store_location": "City 67",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2021-02-04T14:57:54.507376"
+  },
+  {
+    "_id": "STORE068",
+    "store_location": "City 68",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2020-05-24T14:57:54.507380"
+  },
+  {
+    "_id": "STORE069",
+    "store_location": "City 69",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2018-11-30T14:57:54.507384"
+  },
+  {
+    "_id": "STORE070",
+    "store_location": "City 70",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2023-01-09T14:57:54.507388"
+  },
+  {
+    "_id": "STORE071",
+    "store_location": "City 71",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2020-12-19T14:57:54.507392"
+  },
+  {
+    "_id": "STORE072",
+    "store_location": "City 72",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2021-09-11T14:57:54.507396"
+  },
+  {
+    "_id": "STORE073",
+    "store_location": "City 73",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2022-05-03T14:57:54.507400"
+  },
+  {
+    "_id": "STORE074",
+    "store_location": "City 74",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2021-07-23T14:57:54.507404"
+  },
+  {
+    "_id": "STORE075",
+    "store_location": "City 75",
+    "store_cluster": "C",
+    "store_type": "OUTLET",
+    "max_option_capacity": 25,
+    "opening_date": "2022-05-21T14:57:54.507408"
+  },
+  {
+    "_id": "ECOMM",
+    "store_location": "Online",
+    "store_cluster": "E",
+    "store_type": "ONLINE",
+    "max_option_capacity": 9999,
+    "opening_date": "2012-02-09T14:57:54.507412"
+  }
+]

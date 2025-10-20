@@ -1,0 +1,218 @@
+[
+  {
+    "_id": "JAN-2026-100",
+    "fiscal_year": 2026,
+    "fiscal_month": "JAN",
+    "dept_id": 100,
+    "allocated_receipts": 405905.31,
+    "based_on_cogs_ly": 350000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "FEB-2026-100",
+    "fiscal_year": 2026,
+    "fiscal_month": "FEB",
+    "dept_id": 100,
+    "allocated_receipts": 232985.7,
+    "based_on_cogs_ly": 200000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "MAR-2026-100",
+    "fiscal_year": 2026,
+    "fiscal_month": "MAR",
+    "dept_id": 100,
+    "allocated_receipts": 170116.08,
+    "based_on_cogs_ly": 150000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "APR-2026-100",
+    "fiscal_year": 2026,
+    "fiscal_month": "APR",
+    "dept_id": 100,
+    "allocated_receipts": 115526.23,
+    "based_on_cogs_ly": 100000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "JAN-2026-200",
+    "fiscal_year": 2026,
+    "fiscal_month": "JAN",
+    "dept_id": 200,
+    "allocated_receipts": 173378.62,
+    "based_on_cogs_ly": 150000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "FEB-2026-200",
+    "fiscal_year": 2026,
+    "fiscal_month": "FEB",
+    "dept_id": 200,
+    "allocated_receipts": 281773.3,
+    "based_on_cogs_ly": 250000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "MAR-2026-200",
+    "fiscal_year": 2026,
+    "fiscal_month": "MAR",
+    "dept_id": 200,
+    "allocated_receipts": 346661.68,
+    "based_on_cogs_ly": 300000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "APR-2026-200",
+    "fiscal_year": 2026,
+    "fiscal_month": "APR",
+    "dept_id": 200,
+    "allocated_receipts": 226926.5,
+    "based_on_cogs_ly": 200000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "JAN-2026-300",
+    "fiscal_year": 2026,
+    "fiscal_month": "JAN",
+    "dept_id": 300,
+    "allocated_receipts": 112915.69,
+    "based_on_cogs_ly": 100000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "FEB-2026-300",
+    "fiscal_year": 2026,
+    "fiscal_month": "FEB",
+    "dept_id": 300,
+    "allocated_receipts": 169529.28,
+    "based_on_cogs_ly": 150000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "MAR-2026-300",
+    "fiscal_year": 2026,
+    "fiscal_month": "MAR",
+    "dept_id": 300,
+    "allocated_receipts": 228817.15,
+    "based_on_cogs_ly": 200000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "APR-2026-300",
+    "fiscal_year": 2026,
+    "fiscal_month": "APR",
+    "dept_id": 300,
+    "allocated_receipts": 289204.49,
+    "based_on_cogs_ly": 250000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "JAN-2026-400",
+    "fiscal_year": 2026,
+    "fiscal_month": "JAN",
+    "dept_id": 400,
+    "allocated_receipts": 56903.52,
+    "based_on_cogs_ly": 50000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "FEB-2026-400",
+    "fiscal_year": 2026,
+    "fiscal_month": "FEB",
+    "dept_id": 400,
+    "allocated_receipts": 81127.7,
+    "based_on_cogs_ly": 70000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "MAR-2026-400",
+    "fiscal_year": 2026,
+    "fiscal_month": "MAR",
+    "dept_id": 400,
+    "allocated_receipts": 116329.22,
+    "based_on_cogs_ly": 100000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "APR-2026-400",
+    "fiscal_year": 2026,
+    "fiscal_month": "APR",
+    "dept_id": 400,
+    "allocated_receipts": 169293.81,
+    "based_on_cogs_ly": 150000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "JAN-2026-500",
+    "fiscal_year": 2026,
+    "fiscal_month": "JAN",
+    "dept_id": 500,
+    "allocated_receipts": 351852.88,
+    "based_on_cogs_ly": 300000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "FEB-2026-500",
+    "fiscal_year": 2026,
+    "fiscal_month": "FEB",
+    "dept_id": 500,
+    "allocated_receipts": 402765.33,
+    "based_on_cogs_ly": 350000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "MAR-2026-500",
+    "fiscal_year": 2026,
+    "fiscal_month": "MAR",
+    "dept_id": 500,
+    "allocated_receipts": 465803.63,
+    "based_on_cogs_ly": 400000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "APR-2026-500",
+    "fiscal_year": 2026,
+    "fiscal_month": "APR",
+    "dept_id": 500,
+    "allocated_receipts": 574277.45,
+    "based_on_cogs_ly": 500000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "JAN-2026-600",
+    "fiscal_year": 2026,
+    "fiscal_month": "JAN",
+    "dept_id": 600,
+    "allocated_receipts": 57786.17,
+    "based_on_cogs_ly": 50000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "FEB-2026-600",
+    "fiscal_year": 2026,
+    "fiscal_month": "FEB",
+    "dept_id": 600,
+    "allocated_receipts": 113195.14,
+    "based_on_cogs_ly": 100000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "MAR-2026-600",
+    "fiscal_year": 2026,
+    "fiscal_month": "MAR",
+    "dept_id": 600,
+    "allocated_receipts": 172061.05,
+    "based_on_cogs_ly": 150000,
+    "otb_status": "OPEN"
+  },
+  {
+    "_id": "APR-2026-600",
+    "fiscal_year": 2026,
+    "fiscal_month": "APR",
+    "dept_id": 600,
+    "allocated_receipts": 231020.77,
+    "based_on_cogs_ly": 200000,
+    "otb_status": "OPEN"
+  }
+]
