@@ -1,72 +1,111 @@
 # backend_django/api/models.py
+from django.db import models
 
-from django.db import models 
+# ======================================================================
+# 1. StoresMaster (CORREGIDO)
+# ======================================================================
 
-# ----------------------------------------------------------------------
-# 1. Budget OTB (Colección Original: budget_otb)
-# ----------------------------------------------------------------------
-class BudgetOTB(models.Model):
-    # Asumimos que dept_id ahora es una clave foránea si se tiene una tabla de Departamentos/Tiendas
-    # Pero por simplicidad, lo mantenemos como IntegerField si no hay tabla de Tiendas/Departamentos
-    
-    fiscal_year = models.IntegerField()
-    fiscal_month = models.CharField(max_length=10)
-    dept_id = models.IntegerField()
-    allocated_receipts = models.FloatField() 
-    
-    # Campo para asegurar que no haya duplicados de mes/año/departamento
-    class Meta:
-        # unique_together es una buena práctica relacional
-        unique_together = ('dept_id', 'fiscal_year', 'fiscal_month')
-
-    def __str__(self):
-        return f"OTB {self.dept_id} - {self.fiscal_month}/{self.fiscal_year}"
-
-
-# ----------------------------------------------------------------------
-# 2. Product Master (Colección Original: products_master)
-# ----------------------------------------------------------------------
-class ProductMaster(models.Model):
-    style_id = models.CharField(max_length=50, unique=True)
-    dept_id = models.IntegerField() # Mantener la relación con el departamento
-    initial_cost = models.FloatField() 
-    retail_price = models.FloatField()
-    buy_qty_suggested_total = models.IntegerField(default=0) 
-
-    def __str__(self):
-        return self.style_id
-
-# ----------------------------------------------------------------------
-# 3. Stores Master (Colección Original: stores_master) <--- ¡NUEVO!
-# ----------------------------------------------------------------------
 class StoresMaster(models.Model):
-    # CAMBIO: Usar CharField para aceptar texto como "STORE001" y "ECOMM"
+    # PK: CharField para aceptar "STORE001" y "ECOMM"
     store_id = models.CharField(max_length=10, primary_key=True) 
-    store_name = models.CharField(max_length=100)
-    region = models.CharField(max_length=50) 
+    
+    # Campos añadidos para coincidir con synthetic_stores_master.json
+    store_location = models.CharField(max_length=100)
+    store_cluster = models.CharField(max_length=10)
+    store_type = models.CharField(max_length=10)
+    max_option_capacity = models.IntegerField()
+    opening_date = models.DateTimeField()
+    
+    # Nota: Se eliminaron store_name y region ya que no estaban en el JSON
     
     def __str__(self):
-        return self.store_name
-# ----------------------------------------------------------------------
-# 4. Transactions Sales (Colección Original: transactions_sales) <--- ¡NUEVO!
-# ----------------------------------------------------------------------
-class TransactionsSales(models.Model):
-    # Relaciones: Usamos Foreign Keys para enlazar ventas a productos y tiendas
+        return f'{self.store_id} - {self.store_location}'
     
-    # Enlace al producto vendido
-    product = models.ForeignKey(ProductMaster, on_delete=models.CASCADE)
-    # Enlace a la tienda donde ocurrió la venta
-    store = models.ForeignKey(StoresMaster, on_delete=models.CASCADE)
-    
-    sale_date = models.DateField()
-    sale_quantity = models.IntegerField()
-    sale_price = models.FloatField()
-    
-    # Índice para acelerar consultas comunes
     class Meta:
-        indexes = [
-            models.Index(fields=['sale_date', 'store']),
-        ]
-        
+        verbose_name_plural = "Stores Master"
+
+
+# ======================================================================
+# 2. ProductMaster (CORREGIDO)
+# ======================================================================
+
+class ProductMaster(models.Model):
+    # Clave primaria compuesta por STYLE-COLOR-SIZE (usada como PK en el fixture)
+    pk_sku = models.CharField(max_length=50, primary_key=True, db_column='pk_sku')
+    
+    # Campos en el JSON:
+    style_id = models.CharField(max_length=20)
+    vendor_id = models.CharField(max_length=50)
+    dept_id = models.IntegerField()
+    gender = models.CharField(max_length=10)
+    color_id = models.CharField(max_length=10)
+    
+    # DecimalField para el tamaño (e.g., 5.0, 10.5)
+    size_us = models.DecimalField(max_digits=4, decimal_places=1) 
+    
+    # DECIMAL FIELD para Costo/Precio
+    initial_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    # Nombre de campo corregido:
+    initial_retail_price = models.DecimalField(max_digits=10, decimal_places=2) 
+    
+    core_rep_flag = models.CharField(max_length=10)
+    repeat_new_flag = models.CharField(max_length=10)
+    
     def __str__(self):
-        return f"Venta {self.sale_quantity}x de {self.product.style_id}"
+        return self.pk_sku
+    
+    class Meta:
+        verbose_name_plural = "Products Master"
+
+
+# ======================================================================
+# 3. BudgetOTB (AJUSTADO)
+# ======================================================================
+
+class BudgetOTB(models.Model):
+    # Clave primaria basada en el string (ej: JAN-2026-100)
+    pk_otb = models.CharField(max_length=20, primary_key=True, db_column='pk_otb') 
+    
+    # Campos en el JSON:
+    fiscal_year = models.IntegerField()
+    fiscal_month = models.CharField(max_length=3)
+    dept_id = models.IntegerField()
+    allocated_receipts = models.DecimalField(max_digits=12, decimal_places=2)
+    based_on_cogs_ly = models.DecimalField(max_digits=12, decimal_places=2)
+    otb_status = models.CharField(max_length=10)
+    
+    def __str__(self):
+        return self.pk_otb
+    
+    class Meta:
+        verbose_name_plural = "Budget OTB"
+
+
+# ======================================================================
+# 4. TransactionsSales (CORREGIDO)
+# ======================================================================
+
+class TransactionsSales(models.Model):
+    # PK: CharField para el ID de la transacción
+    transaction_id = models.CharField(max_length=30, primary_key=True) 
+    
+    # FOREIGN KEYS
+    # store_id debe apuntar a StoresMaster
+    store = models.ForeignKey(StoresMaster, on_delete=models.DO_NOTHING) 
+    # sku_id debe apuntar a ProductMaster
+    product = models.ForeignKey(ProductMaster, on_delete=models.DO_NOTHING) 
+    
+    # Campos en el JSON:
+    transaction_date = models.DateTimeField()
+    quantity_sold = models.IntegerField()
+    retail_price = models.DecimalField(max_digits=10, decimal_places=2)
+    discount_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    final_price = models.DecimalField(max_digits=10, decimal_places=2)
+    initial_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    gm_dollars = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    def __str__(self):
+        return f'{self.transaction_id} @ {self.store.store_id}'
+    
+    class Meta:
+        verbose_name_plural = "Transactions Sales"
