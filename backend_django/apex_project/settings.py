@@ -101,6 +101,7 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -152,3 +153,12 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+
+# --- Configuración para suprimir warnings en loaddata (Acelera el log) ---
+import warnings
+# Desactiva los warnings de "naive datetime" que ralentizan el log
+warnings.filterwarnings(
+    'ignore',
+    message='DateTimeField .* received a naive datetime',
+    module='django.db.models.fields'
+)
