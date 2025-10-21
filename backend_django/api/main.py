@@ -171,23 +171,26 @@ async def get_stores_data(limit: int = 100):
 async def post_otb_budget_data(budget_data: BudgetOTB):
     """
     Recibe un documento de presupuesto OTB, lo valida con Pydantic,
-    CONSTRUYE el ID compuesto, y lo inserta en la colección 'budget_otb' de MongoDB.
+    CONSTRUYE el ID compuesto, y lo inserta, excluyendo campos no necesarios.
     """
     try:
-        # 1. Convertir el modelo de Pydantic a un diccionario
-        #    IMPORTANTE: Ya no se usa by_alias=True porque construiremos el _id manualmente.
-        budget_dict = budget_data.model_dump()
+        # 1. Convertir a diccionario. Excluimos campos si son None (null) o si tienen un alias 'id'/'otb_id'.
+        # Nota: Usaremos model_dump() y luego limpiaremos el diccionario.
+        budget_dict = budget_data.model_dump(exclude_none=True)
         
-        # 2. CONSTRUIR el ID compuesto (ej: "JAN-2026-100")
+        # 2. CONSTRUIR el ID compuesto (ej: "JAN-2027-888")
         otb_id = f"{budget_data.fiscal_month}-{budget_data.fiscal_year}-{budget_data.dept_id}"
         
         # 3. Mapear el ID compuesto al campo '_id' de MongoDB
         budget_dict["_id"] = otb_id
         
-        # Opcional, si tu modelo Pydantic tiene un campo 'id' que no queremos en el documento final:
-        if "id" in budget_dict:
+        # 4. LIMPIEZA CRÍTICA: Eliminar cualquier campo que Pydantic haya incluido
+        #    que no sea parte de tus datos, como el campo 'id' o 'otb_id' (que es None).
+        if "otb_id" in budget_dict:
+            budget_dict.pop("otb_id")
+        if "id" in budget_dict: # En caso de que el campo se llame 'id'
             budget_dict.pop("id")
-
+            
         # Seleccionar la colección de presupuesto
         budget_collection = db["budget_otb"]
 
@@ -195,7 +198,6 @@ async def post_otb_budget_data(budget_data: BudgetOTB):
         result = budget_collection.insert_one(budget_dict)
         
         if result.inserted_id:
-            # Devolver el ID insertado
             return {"status": "success", "message": "Budget OTB data inserted successfully", "id": str(result.inserted_id)}
         else:
             raise HTTPException(status_code=500, detail="Database insertion failed.")
@@ -203,7 +205,6 @@ async def post_otb_budget_data(budget_data: BudgetOTB):
     except Exception as e:
         print(f"ERROR CRÍTICO en POST /api/otb_budget: {e}")
         if "duplicate key error" in str(e):
-             # Este error debe ocurrir si el ID compuesto ya existe
              raise HTTPException(status_code=409, detail="Error: El identificador de presupuesto (e.g., mes/año/dpto) ya existe.")
 
         raise HTTPException(status_code=500, detail=f"Error al procesar datos de presupuesto: {e}")
