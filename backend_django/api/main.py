@@ -106,3 +106,43 @@ async def get_sales_data(limit: int = 1000):
         print(f"ERROR CRÍTICO al obtener datos de ventas: {e}") 
         # Devuelve un mensaje de error más útil al cliente
         raise HTTPException(status_code=500, detail=f"Error al consultar datos de ventas. Revise el log de Render: {e}")
+    
+# --- AÑADE ESTO AL FINAL DEL ARCHIVO main.py ---
+
+@app.get("/api/products", tags=["Data"])
+async def get_products_data(limit: int = 1000):
+    """Obtiene datos de la tabla maestra de Productos (limitado por defecto)."""
+    try:
+        # Reemplaza 'products_master' si tu colección se llama diferente en Atlas
+        products_collection = db["products_master"] 
+        
+        # Consulta de PyMongo
+        data = list(products_collection.find().limit(limit))
+        
+        # Serialización robusta
+        serialized_data = [serialize_mongo_doc(doc) for doc in data]
+        
+        return serialized_data
+    except Exception as e:
+        print(f"ERROR CRÍTICO al obtener datos de productos: {e}")
+        raise HTTPException(status_code=500, detail=f"Error al consultar datos de productos. Revise el log de Render: {e}")
+
+# --- AÑADE ESTO PARA STORES (Tiendas) ---
+
+@app.get("/api/stores", tags=["Data"])
+async def get_stores_data(limit: int = 100):
+    """Obtiene datos de la tabla maestra de Tiendas (limitado por defecto)."""
+    try:
+        # Reemplaza 'stores_master' si tu colección se llama diferente en Atlas
+        stores_collection = db["stores_master"] 
+        
+        # Consulta de PyMongo
+        data = list(stores_collection.find().limit(limit))
+        
+        # Serialización robusta
+        serialized_data = [serialize_mongo_doc(doc) for doc in data]
+        
+        return serialized_data
+    except Exception as e:
+        print(f"ERROR CRÍTICO al obtener datos de tiendas: {e}")
+        raise HTTPException(status_code=500, detail=f"Error al consultar datos de tiendas. Revise el log de Render: {e}")
