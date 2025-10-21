@@ -165,3 +165,37 @@ async def get_stores_data(limit: int = 100):
         print(f"ERROR CRÍTICO al obtener datos de tiendas: {e}")
         raise HTTPException(status_code=500, detail=f"Error al consultar datos de tiendas. Revise el log de Render: {e}")
     
+# --- AÑADE ESTO AL FINAL DEL ARCHIVO main.py (después de get_stores_data) ---
+
+@app.post("/api/otb_budget", tags=["Planning"])
+async def post_otb_budget_data(budget_data: BudgetOTB):
+    """
+    Recibe un documento de presupuesto OTB, lo valida con Pydantic
+    y lo inserta en la colección 'budget_otb' de MongoDB.
+    """
+    try:
+        # Convertir el modelo de Pydantic a un diccionario, incluyendo el alias '_id'
+        budget_dict = budget_data.model_dump(by_alias=True)
+        
+        # Mapear 'otb_id' a '_id' en el diccionario para la inserción
+        if "otb_id" in budget_dict:
+            budget_dict["_id"] = budget_dict.pop("otb_id")
+        
+        # Seleccionar la colección de presupuesto
+        budget_collection = db["budget_otb"]
+
+        # Insertar el documento en MongoDB
+        result = budget_collection.insert_one(budget_dict)
+        
+        if result.inserted_id:
+            # Devolver el ID insertado
+            return {"status": "success", "message": "Budget OTB data inserted successfully", "id": str(result.inserted_id)}
+        else:
+            raise HTTPException(status_code=500, detail="Database insertion failed.")
+
+    except Exception as e:
+        print(f"ERROR CRÍTICO en POST /api/otb_budget: {e}")
+        if "duplicate key error" in str(e):
+             raise HTTPException(status_code=409, detail="Error: El identificador de presupuesto (e.g., mes/año/dpto) ya existe.")
+
+        raise HTTPException(status_code=500, detail=f"Error al procesar datos de presupuesto: {e}")
