@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 from typing import List, Optional
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
 from pymongo import MongoClient
 
@@ -230,3 +230,31 @@ async def get_otb_budget_data():
         print(f"ERROR CRÍTICO al obtener datos de presupuesto OTB: {e}")
         raise HTTPException(status_code=500, detail=f"Error al consultar datos de presupuesto: {e}")
 
+@app.get("/api/products", tags=["Inventory"])
+async def get_products_by_dept(dept_id: int = Query(..., description="ID del departamento para filtrar productos.")):
+    """
+    Retorna la lista de productos (SKUs) para un departamento específico.
+    Incluye datos de costo y retail para calcular el margen.
+    """
+    try:
+        # Seleccionar la colección de inventario de productos
+        product_collection = db["product_inventory"]
+        
+        # Buscar todos los productos que coincidan con el dept_id proporcionado
+        # Se proyectan solo los campos necesarios (costo, retail, ID)
+        products = list(product_collection.find(
+            {"dept_id": dept_id},
+            {"_id": 0, "style_id": 1, "color_id": 1, "size_us": 1, 
+             "initial_cost": 1, "initial_retail_price": 1, "dept_id": 1}
+        ))
+        
+        # Si no se encuentran productos, devolver una lista vacía
+        if not products:
+            return []
+            
+        # El campo 'style_id' servirá como un estilo único para la tabla
+        return products
+
+    except Exception as e:
+        print(f"ERROR CRÍTICO en GET /api/products: {e}")
+        raise HTTPException(status_code=500, detail=f"Error al obtener datos de productos: {e}")
