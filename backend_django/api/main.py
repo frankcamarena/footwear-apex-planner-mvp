@@ -258,3 +258,58 @@ async def get_products_by_dept(dept_id: int = Query(..., description="ID del dep
     except Exception as e:
         print(f"ERROR CRÍTICO en GET /api/products: {e}")
         raise HTTPException(status_code=500, detail=f"Error al obtener datos de productos: {e}")
+    
+@app.get("/api/margins/average", tags=["Inventory"])
+async def get_average_margins():
+    """
+    Calcula el Margen Bruto Inicial (IMU) promedio para cada departamento 
+    usando la agregación de MongoDB.
+    """
+    try:
+        product_collection = db["products_master"] # O el nombre de tu colección de productos
+        
+        pipeline = [
+            # 1. Agrega campos para calcular la marca bruta inicial (IMU)
+            {
+                "$addFields": {
+                    "imu_decimal": {
+                        "$cond": {
+                            "if": {"$gt": ["$initial_retail_price", 0]},
+                            "then": {
+                                "$divide": [
+                                    {"$subtract": ["$initial_retail_price", "$initial_cost"]},
+                                    "$initial_retail_price"
+                                ]
+                            },
+                            "else": 0
+                        }
+                    }
+                }
+            },
+            # 2. Agrupa por departamento y calcula el IMU promedio
+            {
+                "$group": {
+                    "_id": "$dept_id",
+                    # Multiplicamos por 100 para obtener el porcentaje
+                    "average_margin": {"$avg": "$imu_decimal"} 
+                }
+            },
+            # 3. Proyecta para renombrar los campos a algo más amigable
+            {
+                "$project": {
+                    "_id": 0,
+                    "dept_id": "$_id",
+                    "margin_percent": {"$multiply": ["$average_margin", 100]}
+                }
+            }
+        ]
+        
+        # Ejecuta la agregación
+        margins = list(product_collection.aggregate(pipeline))
+        
+        # El resultado es una lista de diccionarios: [{"dept_id": 100, "margin_percent": 55.4}, ...]
+        return margins
+
+    except Exception as e:
+        print(f"ERROR CRÍTICO en GET /api/margins/average: {e}")
+        raise HTTPException(status_code=500, detail=f"Error al calcular márgenes promedio: {e}")
