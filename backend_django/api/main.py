@@ -199,3 +199,26 @@ async def post_otb_budget_data(budget_data: BudgetOTB):
              raise HTTPException(status_code=409, detail="Error: El identificador de presupuesto (e.g., mes/año/dpto) ya existe.")
 
         raise HTTPException(status_code=500, detail=f"Error al procesar datos de presupuesto: {e}")
+    
+# --- Endpoint GET para Presupuesto OTB ---
+
+@app.get("/api/otb_budget", tags=["Planning"])
+async def get_otb_budget_data():
+    """
+    Obtiene todos los documentos de presupuesto OTB.
+    """
+    try:
+        otb_collection = db["budget_otb"] 
+        
+        # Consulta de PyMongo: Obtiene todos los documentos (idealmente se filtraría, 
+        # pero para el MVP tomamos todos los existentes)
+        data = list(otb_collection.find())
+        
+        # Serialización robusta
+        serialized_data = [serialize_mongo_doc(doc) for doc in data]
+        
+        return serialized_data
+    except Exception as e:
+        print(f"ERROR CRÍTICO al obtener datos de presupuesto OTB: {e}")
+        raise HTTPException(status_code=500, detail=f"Error al consultar datos de presupuesto: {e}")
+
