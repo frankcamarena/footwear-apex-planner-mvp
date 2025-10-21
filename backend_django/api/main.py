@@ -49,6 +49,24 @@ class StoresMaster(BaseModel):
     store_name: Optional[str]
     # ... otros campos de StoresMaster
 
+class BudgetOTB(BaseModel):
+    # El _id de Mongo lo manejará la base de datos, pero el _id lógico ("JAN-2026-100") lo validamos aquí
+    otb_id: str = Field(alias="_id", default=None) # Si usas el _id como identificador lógico, podemos mapearlo
+
+    # Campos de Presupuesto
+    fiscal_year: int
+    fiscal_month: str
+    dept_id: int
+    allocated_receipts: float
+    based_on_cogs_ly: float
+    otb_status: str
+
+    # Permite que la validación se realice incluso si los datos vienen con el campo "_id"
+    model_config = {
+        "extra": "ignore",
+        "populate_by_name": True # Permite usar el alias como "_id"
+    }
+
 # --- Inicialización de FastAPI ---
 app = FastAPI(
     title="Footwear Apex Planner MVP API (FastAPI + MongoDB)",
@@ -146,3 +164,4 @@ async def get_stores_data(limit: int = 100):
     except Exception as e:
         print(f"ERROR CRÍTICO al obtener datos de tiendas: {e}")
         raise HTTPException(status_code=500, detail=f"Error al consultar datos de tiendas. Revise el log de Render: {e}")
+    
